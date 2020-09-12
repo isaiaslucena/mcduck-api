@@ -61,6 +61,6 @@
 						"@php artisan key:generate --ansi",
 						"@php artisan config:cache"
         ],
-        "test": "@php artisan test --without-tty -n"
+        "test": "@php artisan test --without-tty"
     }
 }
