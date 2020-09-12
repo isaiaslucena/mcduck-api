@@ -1,0 +1,18 @@
+{
+	"env": {
+		"SECRET_TOKEN": {
+			"description": "A secret key for verifying the integrity of signed cookies.",
+			"generator": "secret"
+		},
+		"WEB_CONCURRENCY": {
+			"description": "The number of processes to run.",
+			"value": "5"
+		},
+		"APP_NAME": { "value": "Laravel" },
+		"APP_ENV": { "value": "local" },
+		"APP_KEY": { "value": "base64:eN2oeqIem7ScjuNnDVN5jeJ0gtbNpnmEqwXl0Ne5dJM=" },
+		"APP_DEBUG": { "value": "true"},
+		"APP_URL": { "value": "http://localhost" },
+		"LOG_CHANNEL": { "value": "stack" }
+	}
+}
