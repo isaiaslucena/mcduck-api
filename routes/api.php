@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CurrencyConverter;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/health', function () {
 	return response()->json("OK");
 });
+
+Route::get('/currencyList', [CurrencyConverter::class, 'currencyList']);
+
+Route::get('/currencyConvert', [CurrencyConverter::class, 'currencyConvert']);
