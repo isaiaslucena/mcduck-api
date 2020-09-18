@@ -9,4 +9,3 @@ deploy:
   on: development
 	run: "composer install"
   skip_cleanup: 'true'
-
