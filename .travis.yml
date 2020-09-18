@@ -1,0 +1,14 @@
+language: php
+php:
+- 7.4.10
+deploy:
+  provider: heroku
+  api_key:
+    secure: YZPpothk2bG2hQPuvyAwgKnO9+megtAcjHRkOzTfnMKnvVUohoqJv+6Is00gjvMogEB8kQewk7KZEU5PhPidTFbJhQV+b3yFG3rtbPju6+fS6NfLlq6zS8Q1CmtkbpwF8k+Cy0LtfqFtBA/j813uOr9t5PDZmL736gSC/sM0sm8NImAJ49HkJyySux1WPXTEfSBdrxbHTzdhpQ5KSnm35MzbJcQy06t2ZKdsik81Cx1tuZx2+iFkK6pLtpJzuZprG1QOA+pkFy047HwHiSKxjMOLU19/i+P9HE3iEW4XkqJP6xZ9/ST5ak8btXmQ9M5x1KguM5ZwOCcmMdUGRlXqWKT9xSCWYMwIx+7wl+3wkpbmEtIVU3Bqm9LKur0McchSMm2A3oXNKxu0avdPr/OqamCccZ0UcWL9IWlEuMVk/Yrhr1nGV1/6iUPufAQGvYACf091vOwL9OlmSWcVTO6BsyHto88l5pL/3dqnitGDpq2CLOIYubizC4Tlkd/cQ6dNYFoEkHLrSli5TBsA+rIws768CZGGMF2G4GJoS3tfPjynPoQ+vNwKfg3svok09BJrw8AvIo8DUTOHdO23GR6WNjiumqvBUnOWvVXxaUzbmJk8s5ZNFAspQXsOBNMpilvFsgmxNmlj53T6NfctJqfpr0qtyyQSDyoyLyWTCgcxWtY=
+  app:
+		develop: mcduck-staging-api
+		master: mcduck-api
+  on:
+    repo: isaiasneto/mcduck-api
+  skip_cleanup: 'true'
+
