@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CurrencyConverter;
+use App\Http\Controllers\LogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,5 @@ Route::get('/health', function () {
 Route::get('/currencyList', [CurrencyConverter::class, 'currencyList']);
 
 Route::get('/currencyConvert', [CurrencyConverter::class, 'currencyConvert']);
+
+Route::get('/showConvertOperations', [LogController::class, 'index']);

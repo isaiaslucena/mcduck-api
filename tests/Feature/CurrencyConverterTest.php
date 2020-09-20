@@ -34,6 +34,18 @@ class CurrencyConverterTest extends TestCase {
 	 *
 	 * @return void
 	 */
+	public function testIfReturnInvalidWhenCurrenciesArEqual() {
+		$this->withoutExceptionHandling();
+
+		$response = $this->get('/api/currencyConvert?from=usd&to=usd&amount=24&mockData=true');
+		$response->assertStatus(500);
+	}
+
+	/**
+	 * A basic test.
+	 *
+	 * @return void
+	 */
 	public function testIfReturnInvalidCurrencyOfFromParam() {
 		$this->withoutExceptionHandling();
 
