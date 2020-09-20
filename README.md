@@ -31,7 +31,7 @@ example: https://mcduck-api.herokuapp.com/api/currencyConvert?from=eur&to=eth&am
 ### Get the last twenty converted operations:
 
 ```
-https://mcduck-api.herokuapp.com/api/api/showConvertOperations
+https://mcduck-api.herokuapp.com/api/showConvertOperations
 ```
 
 
