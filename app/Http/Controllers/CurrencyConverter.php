@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use App\Log;
 
 class CurrencyConverter extends Controller {
 	private function mockCurrencyData() {
@@ -65,18 +66,22 @@ class CurrencyConverter extends Controller {
 	public function currencyConvert(Request $request) {
 		$from = strtoupper($request->from);
 		$to = strtoupper($request->to);
-		$amount = (int) $request->amount;
+		$amount = (float) $request->amount;
+		$requestIp = $request->ip();
 
 		$message = 'Convert '.$amount.' '.$from.' to '.$to;
+		$fromValue = 1;
+		$toValue = 1;
 		$result = null;
-		$statusCode = 200;
+		$statusCode = 500;
 
+		if ($from === $to) $message = "Currency cannot be equal!";
 		if (!$this->digitalCurrencyExists($from, $request) && !$this->isANormalCurrency($from)) $message = "Invalid currency at 'from' param!";
 		if (!$this->digitalCurrencyExists($to, $request) && !$this->isANormalCurrency($to)) $message = "Invalid currency at 'to' param!";
 
 		if ($this->isANormalCurrency($from) && $this->digitalCurrencyExists($to, $request)) {
 			$digitalValue = (float) $this->getValueOfDigitalCurrency($to, $from, $request);
-			$result = (float) number_format($amount / $digitalValue, 6);
+			$result = (float) number_format($amount / $digitalValue, 6, '.', '');
 		}
 
 		if ($this->digitalCurrencyExists($from, $request) && $this->isANormalCurrency($to)) {
@@ -84,9 +89,23 @@ class CurrencyConverter extends Controller {
 			$result = (float) number_format($amount * $normalValue, 3, '.', '');
 		}
 
+		if ($result && !$request->mockData) {
+			$log = new Log;
+			$log->from = $from;
+			$log->from_value = $this->isANormalCurrency($from) ? number_format(1 / $digitalValue, 6, '.', '') : 1 ;
+			$log->to = $to;
+			$log->to_value = $this->isANormalCurrency($to) ? $normalValue : 1 ;
+			$log->amount = $amount;
+			$log->result = $result;
+			$log->request_ip = $requestIp;
+			$log->save();
+
+			$statusCode = 200;
+		}
+
 		return response()->json([
 			'message' => $message,
 			'result' => $result
-		], $result ? 200 : 500);
+		], $statusCode);
 	}
 }
